@@ -25,13 +25,12 @@ function Get-Remotes {
     return $remotes
 }
 
-Write-Output "*********************** Get-Remotes *** to see the origin of your git repos. ******************"
-
-Get-Remotes | Out-File repos:\LaptopBuddy\repoList.txt -Force
+Write-Output "`r`n*********************** Get-Remotes *** to see the origin of your git repos. ***********************`r`n"
 
 Copy-Item $profile -destination ./LaptopBuddy -Force
 
 function Publish-Buddy {
+    Get-Remotes | Out-File repos:\LaptopBuddy\repoList.txt -Force
     Push-Location repos:\LaptopBuddy
     if ((git ls-files) -notcontains "$($($profile).Split('\') | Select-Object -Last 1)") {
         git add "$($($profile).Split('\') | Select-Object -Last 1)"
@@ -46,5 +45,4 @@ function Publish-Buddy {
     Pop-Location
 }
 
-Write-Output [Environment]::NewLine
-Write-Output "***************** Publish-Buddy ******* to push profile updates and other local config to remote ************"
+Write-Output "`r`n*********************** Publish-Buddy *** to push profile updates and other local config to remote ***********************`r`n"
