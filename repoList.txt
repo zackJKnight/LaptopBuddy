@@ -1,0 +1,12 @@
+https://github.com/ludohenin/angularjs-ts-seed.git
+https://github.com/vsternbach/angularjs-typescript-webpack.git
+https://github.com/angular/angular-seed.git
+https://github.com/zackJKnight/EloquentJSExercises.git
+https://github.com/zackJKnight/LaptopBuddy.git
+https://github.com/zackJKnight/Lineup.Coach.git
+https://github.com/zackJKnight/Lineup-Coach-UI.git
+https://zacharyknight.visualstudio.com/ngFunDamentals/_git/ngFunDamentals
+https://github.com/JasonGT/NorthwindTraders.git
+https://github.com/PowerShell/Polaris.git
+https://github.com/vexx32/PSKoans.git
+https://github.com/zackJKnight/U8Lineup.git

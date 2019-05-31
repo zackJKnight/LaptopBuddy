@@ -16,21 +16,35 @@ if ((Test-Path LaptopBuddy) -eq $false) {
 }
 
 function Get-Remotes {
+    $remotes = New-Object 'System.Collections.Generic.List[string]'
     Push-Location repos:\
     Get-ChildItem | Select-Object -ExpandProperty name | ForEach-Object {
-        Start-Process git -argumentlist "--git-dir=./$_/.git", config, --get, remote.origin.url -NoNewWindow
+        $remotes.Add((& git "--git-dir=./$_/.git" config --get remote.origin.url))   
     }
     Pop-Location
+    return $remotes
 }
 
 Write-Output "*********************** Get-Remotes *** to see the origin of your git repos. ******************"
 
+Get-Remotes | Out-File repos:\LaptopBuddy\repoList.txt -Force
+
 Copy-Item $profile -destination ./LaptopBuddy -Force
 
-Push-Location repos:\LaptopBuddy
-if((git ls-files) -notcontains "$($($profile).Split('\') | Select-Object -Last 1)"){
-    git add .
+function Publish-Buddy {
+    Push-Location repos:\LaptopBuddy
+    if ((git ls-files) -notcontains "$($($profile).Split('\') | Select-Object -Last 1)") {
+        git add "$($($profile).Split('\') | Select-Object -Last 1)"
+    }
+
+    if ((git ls-files) -notcontains 'repoList.txt') {
+        git add ./repoList.txt
+    }
+    git stage .
+    git commit -m 'Updated pwsh profile.'
+    git push
+    Pop-Location
 }
-git commit -m 'Updated pwsh profile.'
-git push
-Pop-Location
+
+Write-Output [Environment]::NewLine
+Write-Output "***************** Publish-Buddy ******* to push profile updates and other local config to remote ************"
