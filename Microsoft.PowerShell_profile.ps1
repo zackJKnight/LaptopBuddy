@@ -15,6 +15,16 @@ if ((Test-Path LaptopBuddy) -eq $false) {
     git clone https://github.com/zackJKnight/LaptopBuddy.git
 }
 
+function Update-Pwsh {
+    # Thanks, Thomas Maurer!
+
+    if ($IsWindows) { iex "&amp; { $(irm https://aka.ms/install-powershell.ps1) } -UseMSI" }
+
+    if ($IsLinux) { wget -O - https://aka.ms/install-powershell.sh | sudo bash }
+
+    if ($IsMacOS) { brew cask install powershell }
+}
+
 function Get-Remotes {
     $remotes = New-Object 'System.Collections.Generic.List[string]'
     Push-Location repos:\
