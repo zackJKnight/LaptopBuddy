@@ -56,3 +56,6 @@ function Publish-Buddy {
 }
 
 Write-Output "`r`n*********************** Publish-Buddy *** to push profile updates and other local config to remote ***********************`r`n"
+
+New-Item Env:\TERM_PROFILE -Value "$Env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\RoamingState\profiles.json"
+Write-Output "Windows Term Settings Env Variable: `$Env:TERM_PROFILE"
