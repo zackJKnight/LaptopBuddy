@@ -18,7 +18,7 @@ if ((Test-Path LaptopBuddy) -eq $false) {
 function Update-Pwsh {
     # Thanks, Thomas Maurer!
 
-    if ($IsWindows) { iex "&amp; { $(irm https://aka.ms/install-powershell.ps1) } -UseMSI" }
+    if ($IsWindows) { iex "& { $(irm https://aka.ms/install-powershell.ps1) } -UseMSI -preview" }
 
     if ($IsLinux) { wget -O - https://aka.ms/install-powershell.sh | sudo bash }
 
